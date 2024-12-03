@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastrar Filme</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fecharModal()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input [(ngModel)]="filme.titulo" name="titulo" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Ano</ion-label>
+      <ion-input type="number" [(ngModel)]="filme.ano" name="ano" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-textarea [(ngModel)]="filme.descricao" name="descricao" required></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Categoria</ion-label>
+      <ion-select [(ngModel)]="filme.categoria" name="categoria" required>
+        <ion-select-option value="acao">Ação</ion-select-option>
+        <ion-select-option value="drama">Drama</ion-select-option>
+        <ion-select-option value="comedia">Comédia</ion-select-option>
+        <ion-select-option value="suspense">Suspense</ion-select-option>
+        <ion-select-option value="terror">Terror</ion-select-option>
+        <ion-select-option value="ficcao">Ficção Científica</ion-select-option>
+        <ion-select-option value="romance">Romance</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Capa</ion-label>
+      <input type="file" (change)="carregarCapa($event)" />
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="block" color="success" (click)="confirmarCadastro()">Cadastrar</ion-button>
+</ion-content>

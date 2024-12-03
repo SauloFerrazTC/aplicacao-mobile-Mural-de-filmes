@@ -1,0 +1,44 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+  }
+  
+  ion-card {
+    width: 100%;
+    max-width: 400px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+  
+  ion-card-header {
+    text-align: center;
+    color: var(--ion-color-primary);
+  }
+  
+  ion-card-title {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+  
+  ion-card-subtitle {
+    font-size: 1em;
+    color: var(--ion-color-medium);
+  }
+  
+  ion-item {
+    --padding-start: 0;
+    margin: 8px 0;
+  }
+  
+  ion-input {
+    font-size: 1em;
+  }
+  
+  ion-button {
+    margin-top: 16px;
+    --border-radius: 8px;
+    font-size: 1em;
+  }
+  

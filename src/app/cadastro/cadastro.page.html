@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="form-container">
+  <form (ngSubmit)="onSubmit()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Cadastro</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Usuário</ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.username" name="username" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Senha</ion-label>
+            <ion-input type="password" [(ngModel)]="usuario.password1" name="password1" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Confirmar Senha</ion-label>
+            <ion-input type="password" [(ngModel)]="usuario.password2" name="password2" required></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <ion-button expand="full" type="submit" (click)="isFormValid()">Cadastrar</ion-button>
+        
+        <ion-button expand="full" fill="clear" (click)="Login()">Fazer login</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </form>
+  </div>
+</ion-content>

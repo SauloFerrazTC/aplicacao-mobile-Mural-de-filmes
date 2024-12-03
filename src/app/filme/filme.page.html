@@ -1,0 +1,108 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mural de Filmes</ion-title>
+    <ion-text slot="end" class="ion-margin-end">
+      <h3>{{usuario.nome}}</h3>
+    </ion-text>
+  </ion-toolbar>
+  
+  
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button color="secondary" expand="block" fill="solid" (click)="abrirCadastroFilme()">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Cadastrar Filme
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" color="danger" (click)="logout()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        Sair
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-item>
+    <ion-label>Filtrar por Categoria</ion-label>
+    <ion-select [(ngModel)]="categoriaSelecionada" (ionChange)="filtrarFilmesPorCategoria()">
+      <ion-select-option value="">Todas</ion-select-option>
+      <ion-select-option value="acao">Ação</ion-select-option>
+      <ion-select-option value="drama">Drama</ion-select-option>
+      <ion-select-option value="comedia">Comédia</ion-select-option>
+      <ion-select-option value="suspense">Suspense</ion-select-option>
+      <ion-select-option value="terror">Terror</ion-select-option>
+      <ion-select-option value="ficcao">Ficção Científica</ion-select-option>
+      <ion-select-option value="romance">Romance</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  
+  <ion-card *ngIf="lista_filmes.length > 0">
+    <ion-card-header>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          
+          <ion-col size="6" size-md="2" *ngFor="let filme of lista_filmes">
+            <ion-card>
+              
+              <ion-card-header>
+                <ion-img *ngIf="filme.capa" [src]="'data:image/jpeg;base64,' + filme.capa" alt="Capa do Filme"></ion-img>
+                <ion-img *ngIf="!filme.capa" src="../../assets/imgs/thumbnail.svg" alt="Sem Capa"></ion-img>
+              </ion-card-header>
+
+             
+              <ion-card-content>
+                <ion-label>
+                  <h2 class="ion-text-wrap"><strong>{{ filme.titulo | uppercase }} ({{ filme.ano }})</strong></h2>
+                  <p><strong>Categoria:</strong> {{ getCategoria(filme.categoria) }}</p>
+                  <p>{{ filme.descricao | slice:0:100 }}...</p>
+                </ion-label>
+
+                
+                <div *ngIf="filme.iduser === usuario.id">
+                  <ion-row class="ion-justify-content-between">
+                    
+                    <ion-col size="auto">
+                      <ion-button color="warning" (click)="editarDescricao(filme)">
+                        Editar Descrição
+                      </ion-button>
+                    </ion-col>
+                    
+                    <ion-col size="auto">
+                      <ion-button color="danger" (click)="confirmarExclusao(filme.id)">
+                        Excluir
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </div>
+
+                
+              </ion-card-content>
+              <ion-col size="auto">
+                <ion-button color="primary" (click)="comentarios(filme)">
+                  Comentários
+                </ion-button>
+              </ion-col>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  
+  <ion-alert *ngIf="lista_filmes.length === 0" 
+              header="Atenção" 
+              message="Nenhum filme encontrado para exibição no momento." 
+              buttons="['OK']">
+  </ion-alert>
+
+</ion-content>

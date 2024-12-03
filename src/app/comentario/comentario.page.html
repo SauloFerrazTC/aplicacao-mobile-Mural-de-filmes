@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title text-center>Comentários</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="fecharModal()">
+        Fechar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div class="add-comment-btn">
+    <ion-button color="primary" expand="full" (click)="adicionarComentario()">
+      Adicionar Comentário
+    </ion-button>
+  </div>
+
+  <ion-list *ngIf="comentarios.length > 0; else semComentarios">
+    <ion-card *ngFor="let comentario of comentarios" color="light">
+      <ion-card-header>
+        <ion-avatar slot="start">
+          <ion-icon name="person-circle" style="font-size: 40px;"></ion-icon>
+        </ion-avatar>
+        <ion-card-title>{{ comentario.username }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ comentario.coment }}</p>
+      </ion-card-content>
+      
+      <div *ngIf="comentario.iduser === usuario.id">
+        <ion-row class="ion-justify-content-between">
+          
+          <ion-col size="auto">
+            <ion-button color="warning" (click)="editarDescricao(comentario)">
+              Editar comentário
+            </ion-button>
+          </ion-col>
+         
+          <ion-col size="auto">
+            <ion-button color="danger" (click)="confirmarExclusao(comentario.id)">
+              Excluir
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card>
+  </ion-list>
+
+  <ng-template #semComentarios>
+    <div class="no-comments">
+      <ion-icon name="chatbubble-ellipses-outline" style="font-size: 48px; color: gray;"></ion-icon>
+      <p>Não há comentários para este filme ainda.</p>
+    </div>
+  </ng-template>
+</ion-content>
+
+
